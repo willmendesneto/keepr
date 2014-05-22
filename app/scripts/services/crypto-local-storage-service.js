@@ -43,11 +43,17 @@ angular.module('keepr')
       secret : '',
 
       /**
+       * Type of storage (localStorage or sessionStorage)
+       * @type {String}
+       */
+      storageType : 'localStorage',
+
+      /**
        * Initialyze service
        * @param  {String} secret Application secret key value
        * @method init
        */
-      init: function(secret){
+      init: function(opts){
 
         //  Load crypto-js lib
         (function(d, s, id){
@@ -64,7 +70,8 @@ angular.module('keepr')
         initialized = true;
         this.JSON = window.JSON;
         this.CryptoJS = !!window.CryptoJS ? window.CryptoJS : false;
-        this.secret = secret;
+
+        angular.extend(this, opts);
       },
 
       // Private methods
@@ -99,7 +106,7 @@ angular.module('keepr')
        * @method get
        */
       get: function(key) {
-        var encrypted = window.localStorage.getItem(key);
+        var encrypted = window[this.storageType].getItem(key);
         return encrypted && this.decrypt(encrypted, this.secret);
       },
 
@@ -117,7 +124,7 @@ angular.module('keepr')
         }
 
         var encrypted = this.encrypt(object, this.secret);
-        window.localStorage.setItem(key, encrypted);
+        window[this.storageType].setItem(key, encrypted);
         return true;
       },
 
@@ -128,7 +135,7 @@ angular.module('keepr')
        * @method remove
        */
       remove: function(key) {
-        window.localStorage.removeItem(key);
+        window[this.storageType].removeItem(key);
         return true;
       }
     };
