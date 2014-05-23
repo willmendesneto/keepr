@@ -235,7 +235,7 @@ module.exports = function (grunt) {
             '<%= yeoman.app %>/scripts/filters/wordsquantity.js',
 
             '<%= yeoman.app %>/scripts/services/alertservice.js',
-            '<%= yeoman.app %>/scripts/services/crypto-local-storage-service.js',
+            '<%= yeoman.app %>/scripts/services/crypto-offline-storage-service.js',
             '<%= yeoman.app %>/scripts/services/notifyservice.js',
             '<%= yeoman.app %>/scripts/services/speech.js'
           ]
@@ -265,7 +265,7 @@ module.exports = function (grunt) {
           '<%= yeoman.app %>/scripts/filters/validateemail.js',
           '<%= yeoman.app %>/scripts/filters/wordsquantity.js',
           '<%= yeoman.app %>/scripts/services/alertservice.js',
-          '<%= yeoman.app %>/scripts/services/crypto-local-storage-service.js',
+          '<%= yeoman.app %>/scripts/services/crypto-offline-storage-service.js',
           '<%= yeoman.app %>/scripts/services/notifyservice.js',
           '<%= yeoman.app %>/scripts/services/speech.js'
         ],

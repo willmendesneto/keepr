@@ -1207,15 +1207,15 @@ angular.module('keepr')
 
 
 /**
- * Provide a service for Crypt/Decrypt localStorage data in application
- * @class CryptoLocalStorageService
+ * Provide a service for Crypt/Decrypt offline storage (localStorage/sessionStorage) data in application
+ * @class CryptoOfflineStorageService
  * @module services
- * @main CryptoLocalStorageService
- * @class CryptoLocalStorageService
+ * @main CryptoOfflineStorageService
+ * @class CryptoOfflineStorageService
  * @static
  */
 angular.module('keepr')
-  .service('CryptoLocalStorageService', function CryptoLocalStorageService() {
+  .service('CryptoOfflineStorageService', function CryptoOfflineStorageService() {
 
     /**
      * Used for load external cryptojs library async
@@ -1249,11 +1249,17 @@ angular.module('keepr')
       secret : '',
 
       /**
+       * Type of offline storage (localStorage/sessionStorage)
+       * @type {String}
+       */
+      storageType : 'localStorage',
+
+      /**
        * Initialyze service
        * @param  {String} secret Application secret key value
        * @method init
        */
-      init: function(secret){
+      init: function(opts){
 
         //  Load crypto-js lib
         (function(d, s, id){
@@ -1270,7 +1276,8 @@ angular.module('keepr')
         initialized = true;
         this.JSON = window.JSON;
         this.CryptoJS = !!window.CryptoJS ? window.CryptoJS : false;
-        this.secret = secret;
+
+        angular.extend(this, opts);
       },
 
       // Private methods
@@ -1299,13 +1306,13 @@ angular.module('keepr')
       },
 
       /**
-       * Get element values in localStorage
+       * Get element values in offline storage (localStorage/sessionStorage)
        * @param  {String} secret Secret key for encrypt
        * @return {String}           Decrypted string
        * @method get
        */
       get: function(key) {
-        var encrypted = window.localStorage.getItem(key);
+        var encrypted = window[this.storageType].getItem(key);
         return encrypted && this.decrypt(encrypted, this.secret);
       },
 
@@ -1323,18 +1330,18 @@ angular.module('keepr')
         }
 
         var encrypted = this.encrypt(object, this.secret);
-        window.localStorage.setItem(key, encrypted);
+        window[this.storageType].setItem(key, encrypted);
         return true;
       },
 
       /**
-       * Remove element of localStorage
+       * Remove element of offline storage (localStorage/sessionStorage)
        * @param  {String} secret Secret key for element
        * @return {Boolean}
        * @method remove
        */
       remove: function(key) {
-        window.localStorage.removeItem(key);
+        window[this.storageType].removeItem(key);
         return true;
       }
     };

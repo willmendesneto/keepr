@@ -1,15 +1,15 @@
 'use strict';
 
 /**
- * Provide a service for Crypt/Decrypt localStorage data in application
- * @class CryptoLocalStorageService
+ * Provide a service for Crypt/Decrypt offline storage (localStorage/sessionStorage) data in application
+ * @class CryptoOfflineStorageService
  * @module services
- * @main CryptoLocalStorageService
- * @class CryptoLocalStorageService
+ * @main CryptoOfflineStorageService
+ * @class CryptoOfflineStorageService
  * @static
  */
 angular.module('keepr')
-  .service('CryptoLocalStorageService', function CryptoLocalStorageService() {
+  .service('CryptoOfflineStorageService', function CryptoOfflineStorageService() {
 
     /**
      * Used for load external cryptojs library async
@@ -43,7 +43,7 @@ angular.module('keepr')
       secret : '',
 
       /**
-       * Type of storage (localStorage or sessionStorage)
+       * Type of offline storage (localStorage/sessionStorage)
        * @type {String}
        */
       storageType : 'localStorage',
@@ -100,7 +100,7 @@ angular.module('keepr')
       },
 
       /**
-       * Get element values in localStorage
+       * Get element values in offline storage (localStorage/sessionStorage)
        * @param  {String} secret Secret key for encrypt
        * @return {String}           Decrypted string
        * @method get
@@ -129,7 +129,7 @@ angular.module('keepr')
       },
 
       /**
-       * Remove element of localStorage
+       * Remove element of offline storage (localStorage/sessionStorage)
        * @param  {String} secret Secret key for element
        * @return {Boolean}
        * @method remove
