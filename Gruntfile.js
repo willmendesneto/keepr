@@ -6,6 +6,12 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+// OBS:
+//  Replace the string with informations
+//  '<%= yeoman.moduleName %>' = Module name
+//  '<%= yeoman.moduleDescription %>' = Module description
+//  '<%= yeoman.moduleUrl %>' = Module url
+
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -22,16 +28,19 @@ module.exports = function (grunt) {
       // configurable paths
       app: require('./bower.json').appPath || 'app',
       dist: 'dist',
+      moduleName: 'keepr',
+      moduleDescription: 'keepr',
+      moduleUrl: 'your-url-here',
       docs: 'docs'
     },
 
     //  Project documentation
     yuidoc: {
       all: {
-        name: 'Keepr',
-        description: 'Keepr',
+        name: '<%= yeoman.moduleName %>',
+        description: '<%= yeoman.moduleDescription %>',
         version: '0.0.1',
-        url: 'your-url-here',
+        url: '<%= yeoman.moduleUrl %>',
         options: {
           paths: ['<%= yeoman.app %>/scripts/'],
           outdir: '<%= yeoman.docs %>/',
@@ -213,31 +222,16 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          '<%= yeoman.dist %>/keepr.min.js': [
-            '<%= yeoman.app %>/scripts/app.js',
-            '<%= yeoman.app %>/scripts/directives/flip-content.js',
-            '<%= yeoman.app %>/scripts/directives/mask.js',
-
-            '<%= yeoman.app %>/scripts/filters/camelcase.js',
-            '<%= yeoman.app %>/scripts/filters/capitalize.js',
-            '<%= yeoman.app %>/scripts/filters/charactersquantity.js',
-            '<%= yeoman.app %>/scripts/filters/conditional.js',
-            '<%= yeoman.app %>/scripts/filters/encodeuri.js',
-            '<%= yeoman.app %>/scripts/filters/inflector.js',
-            '<%= yeoman.app %>/scripts/filters/list.js',
-            '<%= yeoman.app %>/scripts/filters/max.js',
-            '<%= yeoman.app %>/scripts/filters/min.js',
-            '<%= yeoman.app %>/scripts/filters/snakecase.js',
-            '<%= yeoman.app %>/scripts/filters/trim.js',
-            '<%= yeoman.app %>/scripts/filters/uncapitalize.js',
-            '<%= yeoman.app %>/scripts/filters/unique.js',
-            '<%= yeoman.app %>/scripts/filters/validateemail.js',
-            '<%= yeoman.app %>/scripts/filters/wordsquantity.js',
-
-            '<%= yeoman.app %>/scripts/services/alertservice.js',
-            '<%= yeoman.app %>/scripts/services/crypto-offline-storage-service.js',
-            '<%= yeoman.app %>/scripts/services/notifyservice.js',
-            '<%= yeoman.app %>/scripts/services/speech.js'
+          //  package name
+          '<%= yeoman.dist %>/<%= yeoman.moduleName %>.min.js': [
+            //  List of all files in scripts folder (if have some file in "scripts" root folder)
+            '<%= yeoman.app %>/scripts/*.js',
+            //  List of all directives
+            '<%= yeoman.app %>/scripts/directives/**/*.js',
+            //  List of all filters
+            '<%= yeoman.app %>/scripts/filters/**/*.js',
+            //  List of all services
+            '<%= yeoman.app %>/scripts/services/**/*.js'
           ]
         }
       }
@@ -246,30 +240,16 @@ module.exports = function (grunt) {
     concat: {
       dist: {
         src: [
-          '<%= yeoman.app %>/scripts/app.js',
-          '<%= yeoman.app %>/scripts/directives/flip-content.js',
-          '<%= yeoman.app %>/scripts/directives/mask.js',
-          '<%= yeoman.app %>/scripts/filters/camelcase.js',
-          '<%= yeoman.app %>/scripts/filters/capitalize.js',
-          '<%= yeoman.app %>/scripts/filters/charactersquantity.js',
-          '<%= yeoman.app %>/scripts/filters/conditional.js',
-          '<%= yeoman.app %>/scripts/filters/encodeuri.js',
-          '<%= yeoman.app %>/scripts/filters/inflector.js',
-          '<%= yeoman.app %>/scripts/filters/list.js',
-          '<%= yeoman.app %>/scripts/filters/max.js',
-          '<%= yeoman.app %>/scripts/filters/min.js',
-          '<%= yeoman.app %>/scripts/filters/snakecase.js',
-          '<%= yeoman.app %>/scripts/filters/trim.js',
-          '<%= yeoman.app %>/scripts/filters/uncapitalize.js',
-          '<%= yeoman.app %>/scripts/filters/unique.js',
-          '<%= yeoman.app %>/scripts/filters/validateemail.js',
-          '<%= yeoman.app %>/scripts/filters/wordsquantity.js',
-          '<%= yeoman.app %>/scripts/services/alertservice.js',
-          '<%= yeoman.app %>/scripts/services/crypto-offline-storage-service.js',
-          '<%= yeoman.app %>/scripts/services/notifyservice.js',
-          '<%= yeoman.app %>/scripts/services/speech.js'
+            //  List of all files in scripts folder (if have some file in "scripts" root folder)
+            '<%= yeoman.app %>/scripts/*.js',
+            //  List of all directives
+            '<%= yeoman.app %>/scripts/directives/**/*.js',
+            //  List of all filters
+            '<%= yeoman.app %>/scripts/filters/**/*.js',
+            //  List of all services
+            '<%= yeoman.app %>/scripts/services/**/*.js'
         ],
-        dest: '<%= yeoman.dist %>/keepr.js'
+        dest: '<%= yeoman.dist %>/<%= yeoman.moduleName %>.js'
       },
     },
 
@@ -360,8 +340,8 @@ module.exports = function (grunt) {
     'ngmin',
     'copy:dist',
     'uglify',
-    'buildNgModuleFile:keepr.js',
-    'buildNgModuleFile:keepr.min.js'
+    'buildNgModuleFile:'+grunt.config.get('yeoman')['moduleName']+'.js',
+    'buildNgModuleFile:'+grunt.config.get('yeoman')['moduleName']+'.min.js'
   ]);
 
   grunt.registerTask('default', [
