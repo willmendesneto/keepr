@@ -49,7 +49,9 @@
     "node": ">=0.8.0"
   },
   "scripts": {
-    "test": "grunt test",
-    "postinstall": "./node_modules/protractor/bin/webdriver-manager update && cp ./node_modules/protractor/example/chromeOnlyConf.js protractor_conf.js"
+    "prestart": "npm install",
+    "postinstall": "bower install && ./node_modules/protractor/bin/webdriver-manager update && cp ./node_modules/protractor/example/chromeOnlyConf.js protractor_conf.js",
+    "start": "grunt serve",
+    "test": "grunt test"
   }
 }
