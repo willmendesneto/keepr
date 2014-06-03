@@ -928,14 +928,23 @@ angular.module('keepr')
  */
 angular.module('keepr')
   .filter('max', function () {
-    return function (input) {
+    return function (input, elementKey) {
       var out;
       if (!input) {
         return;
       }
+      if (elementKey === undefined || elementKey === null) {
+        elementKey = false;
+      }
       for (var i in input) {
-        if (input[i] > out || out === undefined || out === null) {
-          out = input[i];
+        if (!elementKey) {
+          if (input[i] > out || out === undefined || out === null) {
+            out = input[i];
+          }
+        } else {
+          if (typeof input[i][elementKey] !== 'undefined' && (input[i][elementKey] > out || out === undefined || out === null)) {
+            out = input[i][elementKey];
+          }
         }
       }
       return out;
@@ -1290,7 +1299,7 @@ angular.module('keepr')
        */
       encrypt : function(object, secret) {
         var message = this.CryptoJS ? this.JSON.stringify(object) : object;
-        return this.CryptoJS ? this.CryptoJS.TripleDES.encrypt(message, secret) : object;
+        return this.CryptoJS ? this.CryptoJS.TripleDES.encrypt(message, secret) : this.JSON.stringify(object);
       },
 
       /**
@@ -1301,7 +1310,7 @@ angular.module('keepr')
        * @method decrypt
        */
       decrypt : function(encrypted, secret) {
-        var decrypted = this.CryptoJS ? this.CryptoJS.TripleDES.decrypt(encrypted, secret) : encrypted;
+        var decrypted = this.CryptoJS ? this.CryptoJS.TripleDES.decrypt(encrypted, secret) : this.JSON.parse(encrypted);
         return this.CryptoJS ? this.JSON.parse(decrypted.toString(this.CryptoJS.enc.Utf8)) : decrypted;
       },
 
@@ -1313,7 +1322,7 @@ angular.module('keepr')
        */
       get: function(key) {
         var encrypted = window[this.storageType].getItem(key);
-        return encrypted && this.decrypt(encrypted, this.secret);
+        return this.decrypt(encrypted, this.secret);
       },
 
       /**

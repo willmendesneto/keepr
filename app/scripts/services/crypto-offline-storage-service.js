@@ -84,7 +84,7 @@ angular.module('keepr')
        */
       encrypt : function(object, secret) {
         var message = this.CryptoJS ? this.JSON.stringify(object) : object;
-        return this.CryptoJS ? this.CryptoJS.TripleDES.encrypt(message, secret) : object;
+        return this.CryptoJS ? this.CryptoJS.TripleDES.encrypt(message, secret) : this.JSON.stringify(object);
       },
 
       /**
@@ -95,7 +95,7 @@ angular.module('keepr')
        * @method decrypt
        */
       decrypt : function(encrypted, secret) {
-        var decrypted = this.CryptoJS ? this.CryptoJS.TripleDES.decrypt(encrypted, secret) : encrypted;
+        var decrypted = this.CryptoJS ? this.CryptoJS.TripleDES.decrypt(encrypted, secret) : this.JSON.parse(encrypted);
         return this.CryptoJS ? this.JSON.parse(decrypted.toString(this.CryptoJS.enc.Utf8)) : decrypted;
       },
 
@@ -107,7 +107,7 @@ angular.module('keepr')
        */
       get: function(key) {
         var encrypted = window[this.storageType].getItem(key);
-        return encrypted && this.decrypt(encrypted, this.secret);
+        return this.decrypt(encrypted, this.secret);
       },
 
       /**
