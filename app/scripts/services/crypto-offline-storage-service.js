@@ -1,3 +1,4 @@
+/* globals JSON, CryptoJS */
 'use strict';
 
 /**
@@ -10,30 +11,9 @@
  */
 angular.module('keepr')
   .service('CryptoOfflineStorageService', function CryptoOfflineStorageService() {
+    var loadCrypto = typeof CryptoJS !== 'undefined';
 
-    /**
-     * Used for load external cryptojs library async
-     * @property initialized
-     * @type {Boolean}
-     */
-    var initialized = false;
-
-    // AngularJS will instantiate a singleton by calling "new" on this function
     return {
-
-      /**
-       * Dependency Injection JSON object
-       * @property JSON
-       * @type {Object}
-       */
-      JSON : null,
-
-      /**
-       * Dependency Injection JSON object
-       * @property CryptoJS
-       * @type {Object}
-       */
-      CryptoJS : null,
 
       /**
        * Application secret key string
@@ -54,27 +34,9 @@ angular.module('keepr')
        * @method init
        */
       init: function(opts){
-
-        //  Load crypto-js lib
-        (function(d, s, id){
-          var js, fjs = d.getElementsByTagName(s)[0];
-          if (d.getElementById(id)) {
-            return;
-          }
-          js = d.createElement(s);
-          js.id = id;
-          js.src = '//crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/tripledes.js';
-          fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'ng-crypto-js'));
-
-        initialized = true;
-        this.JSON = window.JSON;
-        this.CryptoJS = !!window.CryptoJS ? window.CryptoJS : false;
-
         angular.extend(this, opts);
       },
 
-      // Private methods
       /**
        * Encrypt object values
        * @param  {Object} object Object for encrypt
@@ -82,9 +44,9 @@ angular.module('keepr')
        * @return {String}        String with encrypted values
        * @method encrypt
        */
-      encrypt : function(object, secret) {
-        var message = this.CryptoJS ? this.JSON.stringify(object) : object;
-        return this.CryptoJS ? this.CryptoJS.TripleDES.encrypt(message, secret) : this.JSON.stringify(object);
+      encrypt: function(object, secret) {
+        var message = loadCrypto ? JSON.stringify(object) : object;
+        return loadCrypto ? CryptoJS.TripleDES.encrypt(message, secret) : JSON.stringify(object);
       },
 
       /**
@@ -94,9 +56,12 @@ angular.module('keepr')
        * @return {String}           Decrypted string
        * @method decrypt
        */
-      decrypt : function(encrypted, secret) {
-        var decrypted = this.CryptoJS ? this.CryptoJS.TripleDES.decrypt(encrypted, secret) : this.JSON.parse(encrypted);
-        return this.CryptoJS ? this.JSON.parse(decrypted.toString(this.CryptoJS.enc.Utf8)) : decrypted;
+      decrypt: function(encrypted, secret) {
+        if (typeof encrypted === 'undefined') {
+          return '';
+        }
+        var decrypted = loadCrypto ? CryptoJS.TripleDES.decrypt(encrypted, secret) : JSON.parse(encrypted);
+        return loadCrypto ? JSON.parse(decrypted.toString(CryptoJS.enc.Utf8)) : decrypted;
       },
 
       /**
@@ -107,11 +72,11 @@ angular.module('keepr')
        */
       get: function(key) {
         var encrypted = window[this.storageType].getItem(key);
-        return this.decrypt(encrypted, this.secret);
+        return encrypted && this.decrypt(encrypted, this.secret);
       },
 
       /**
-       * [set description]
+       * Set element values in offline storage (localStorage/sessionStorage)
        * @param  {String} secret Secret key for encrypt
        * @param  {Object} object Object for encrypt
        * @return {Boolean}
@@ -139,5 +104,4 @@ angular.module('keepr')
         return true;
       }
     };
-
   });

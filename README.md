@@ -6,7 +6,7 @@ This project is a module with a list of services, directives and filters for beg
 
 
 ## 3rd party libraries dependencies ##
-This project doesn't have dependencies with external modules =)
+If you use CryptoOfflineStorageService, you can use CryptoJS file (http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/tripledes.js). If this library don't exists in DOM, this module works without crypt function
 
 ### Installation
 
