@@ -50,7 +50,7 @@
   },
   "scripts": {
     "prestart": "npm install",
-    "postinstall": "bower install && ./node_modules/protractor/bin/webdriver-manager update && cp ./node_modules/protractor/example/chromeOnlyConf.js protractor_conf.js",
+    "postinstall": "bower install && ./node_modules/protractor/bin/webdriver-manager update",
     "start": "grunt serve",
     "test": "grunt test"
   }

@@ -25,13 +25,10 @@ angular.module('keepr')
       _cache: false,
 
       init: function(params){
-        /*var self = new HttpModel($q, $http);
+        var self = this;
         //  Extend params for create a factory in service
         angular.extend(self._params, params );
-        return self;*/
-
-        angular.extend(this._params, params );
-        return this;
+        return self;
       },
 
       /**
