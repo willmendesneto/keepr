@@ -196,9 +196,12 @@ angular.module('keepr')
             }
             iElement.attr('placeholder', maskPlaceholder);
             iElement.val(viewValue);
+
             controller.$viewValue = viewValue;
             // Not using $setViewValue so we don't clobber the model value and dirty the form
             // without any kind of user interaction.
+
+            placeholderVerification();
           }
 
           /**
@@ -514,6 +517,18 @@ angular.module('keepr')
             }
             oldCaretPosition = caretPos;
             setCaretPosition(this, caretPos);
+
+            placeholderVerification();
+          }
+
+          /**
+           * Verification for set placeholder based in "kpPlaceholder" attribute's directive
+           *
+           * @return {[type]} [description]
+           */
+          function placeholderVerification() {
+            value = unmaskValue(controller.$viewValue || '');
+            iElement.attr('placeholder', ((value.length > 0) ? maskPlaceholder : iAttrs.kpPlaceholder ));
           }
 
           /**
