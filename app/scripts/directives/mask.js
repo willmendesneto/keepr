@@ -15,6 +15,8 @@ angular.module('keepr')
       maskDefinitions : {
         '9': /\d/,
         'A': /[a-zA-Z]/,
+        'g': /[a-z]/,
+        'G': /[A-Z]/,
         '*': /[a-zA-Z0-9]/
       }
     };
