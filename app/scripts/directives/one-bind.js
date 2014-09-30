@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('keepr')
-  .directive('oneBind', function($window) {
+  .directive('kpOneBind', function($window) {
     var removeWatch = function(scope, el) {
       scope.$destroy();
       el.removeClass('ng-binding ng-scope');

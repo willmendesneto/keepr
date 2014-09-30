@@ -13,7 +13,7 @@ describe('Directive: oneBind', function () {
     rootScope = $rootScope;
     scope = $rootScope.$new();
     scope.xpto = 'this is the oneBind directive';
-    element = $compile('<span one-bind>{{xpto}}</span>')(scope);
+    element = $compile('<span kp-one-bind>{{xpto}}</span>')(scope);
     scope.$digest();
   }));
 
