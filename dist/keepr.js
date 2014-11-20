@@ -17,19 +17,19 @@ angular.module('keepr')
     /**
      * Controller to directive
      * #### Example of user
-     * `<div class="kp-flip-content" data-click-toggle="true" data-mouseover-toggle="true">
-     *    <div class="kp-flip-content-front">
+     * `<kp-flip-content data-click-toggle="true" data-mouseover-toggle="true">
+     *    <kp-flip-content-front>
      *      <img src="images/yeoman.png" alt="the front" />
-     *    </div>
-     *    <div class="kp-flip-content-back">
+     *    </kp-flip-content-front>
+     *    <kp-flip-content-back>
      *      <img src="images/yeoman.png" alt="the back" />
-     *    </div>
-     *  </div>`
-     * @param  {kp-flip-content} Class for element delimiter
+     *    </kp-flip-content-back>
+     *  </kp-flip-content>`
+     * @param  {kp-flip-content} Element/Attribute for element delimiter
      * @method kpFlipContent
      */
     return {
-      restrict: 'CA',
+      restrict: 'EA',
       scope: {},
       link: function($scope, $elem, $attrs) {
         /**
