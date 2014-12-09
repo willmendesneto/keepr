@@ -12,7 +12,7 @@ describe('Directive: kpFocus', function () {
 
     scope = $rootScope.$new();
     scope.x = '1234567890xpto';
-    element = $compile('<input kp-focus type="number" placeholder="_" ng-model="x" required></input>')(scope);
+    element = $compile('<input kp-focus type="text" placeholder="_" ng-model="x" required></input>')(scope);
     scope.$digest();
   }));
 
