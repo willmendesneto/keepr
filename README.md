@@ -60,7 +60,7 @@ http://plnkr.co/edit/Rln28ZDMpdXxO4ZVadNG?p=info
 ### Directives
 * kpFlipContent: Add flip content for images in aplication
 * kpMask: Add masks in input fields based in mask string
-* oneBind: Removes two-way data bind in simple elements (in biggest projects is recommended to use `bindonce` module)
+* oneBind: Removes two-way data bind in simple elements (in biggest projects using AngularJS <= `1.2.*` is recommended to use `bindonce` module. In AngularJS >= `1.3.*` is recommended use native one-time binding )
 
 Directives example:
 http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=info
