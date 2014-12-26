@@ -107,4 +107,43 @@ describe('Service: OfflineModel', function () {
     expect(MyOfflineModel.getListItems().length).toEqual(1);
   });
 
+  it('#setFields', function () {
+    MyOfflineModel.setFields(['_id', 'name', 'address']);
+
+    var contact = [
+      {
+        name: 'This is a test',
+        address: 'Adress test',
+        phone: '557188998877'
+      }
+    ];
+    var listItems = MyOfflineModel.getListItems();
+    var listItemsLength = listItems.length;
+    var i = 0;
+
+    for ( ; listItemsLength > i; i++) {
+      listItems[i] = MyOfflineModel.createValueObject(listItems[i]);
+    }
+
+    for ( ; listItemsLength > i; i++) {
+      expect(typeof listItems[i].phone === 'undefined').toBe(true);
+    }
+
+    MyOfflineModel.setListItems(myMock)
+                  .setFields(['_id', 'name', 'address', 'phone']);
+
+    i = 0;
+    for ( ; listItemsLength > i; i++) {
+      listItems[i] = MyOfflineModel.createValueObject(listItems[i]);
+    }
+
+    listItems = MyOfflineModel.create(contact);
+    listItemsLength = listItems.length;
+    i = 0;
+    for ( ; listItemsLength > i; i++) {
+      expect(typeof listItems[i].phone !== 'undefined').toBe(true);
+    }
+
+  });
+
 });
