@@ -27,7 +27,7 @@ Once you have keepr in your project, just include 'keepr' as a dependency in you
 ```javascript
     angular.module('myModule', ['keepr'])
 ```
-    
+
 ### Services
 * AlertService: Provide a Alert service for application
 * CryptoLocalStorageService: Provide a service for Crypt/Decrypt localStorage data in application
@@ -60,7 +60,6 @@ http://plnkr.co/edit/Rln28ZDMpdXxO4ZVadNG?p=info
 ### Directives
 * kpFlipContent: Add flip content for images in aplication
 * kpMask: Add masks in input fields based in mask string
-* oneBind: Removes two-way data bind in simple elements (in biggest projects is recommended to use `bindonce` module)
 
 Directives example:
 http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=info
