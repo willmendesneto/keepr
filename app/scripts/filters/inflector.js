@@ -8,7 +8,7 @@
  * @class inflector
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('inflector', function () {
 
     /**

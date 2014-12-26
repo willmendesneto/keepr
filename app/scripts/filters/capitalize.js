@@ -8,7 +8,7 @@
  * @class capitalize
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('capitalize', function () {
     return function (input) {
       var str;

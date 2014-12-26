@@ -7,7 +7,7 @@
  * @main kpFocus
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.directives')
   .directive('kpFocus', function () {
     return {
       restrict: 'A',

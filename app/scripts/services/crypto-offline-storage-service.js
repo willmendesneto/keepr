@@ -9,7 +9,7 @@
  * @class CryptoOfflineStorageService
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .service('CryptoOfflineStorageService', function CryptoOfflineStorageService() {
     var loadCrypto = typeof CryptoJS !== 'undefined';
 

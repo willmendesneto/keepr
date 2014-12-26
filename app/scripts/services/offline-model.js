@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('keepr')
+angular.module('keepr.services')
   .factory('OfflineModel', function OfflineModel($filter, CryptoOfflineStorageService) {
 
     // Service logic

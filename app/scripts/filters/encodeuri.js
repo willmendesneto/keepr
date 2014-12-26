@@ -10,7 +10,7 @@
  * @class encodeUri
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('encodeUri', function () {
     return function (input) {
       if (input === undefined || input === null) {

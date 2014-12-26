@@ -9,7 +9,7 @@
  * @class Speech
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .factory('Speech', function () {
     // Service logic
     // ...

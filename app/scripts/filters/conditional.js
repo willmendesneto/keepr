@@ -10,7 +10,7 @@
  * @class conditional
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('conditional', function () {
     return function(input, trueCase, falseCase) {
       return input === trueCase ? trueCase : falseCase;

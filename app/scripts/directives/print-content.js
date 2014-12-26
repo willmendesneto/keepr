@@ -1,7 +1,7 @@
 /* globals alert */
 'use strict';
 
-angular.module('keepr')
+angular.module('keepr.directives')
   //  <button type="button" print-content print-target="#target" class="btn btn-primary">Imprimir</button>
   // <div id="target"><p>Exemplo</p></div>
   .directive('kpPrintContent', function () {

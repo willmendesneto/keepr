@@ -8,7 +8,7 @@
  * @class camelCase
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('camelCase', ['$filter', function ($filter) {
     return function (input, firstWordWithCase) {
       if (input === null || input === undefined) {

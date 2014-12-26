@@ -8,7 +8,7 @@
  * @class NotifyService
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .service('NotifyService', function NotifyService($rootScope) {
 
     var baseNotification = function() {

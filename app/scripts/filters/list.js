@@ -8,7 +8,7 @@
  * @class list
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('list', function () {
     return function (input, separator) {
       if (separator === null || separator === undefined) {

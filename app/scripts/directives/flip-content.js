@@ -7,7 +7,7 @@
  * @class kpFlipContent
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.directives')
   .directive('kpFlipContent', function () {
 
     /**

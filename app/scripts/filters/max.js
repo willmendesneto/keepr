@@ -8,7 +8,7 @@
  * @class max
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('max', function () {
     return function (input, elementKey) {
       var out;

@@ -8,7 +8,7 @@
  * @main kpMask
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.directives')
   .directive('kpMask', function ($parse) {
 
     var maskConfig = {

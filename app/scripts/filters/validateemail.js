@@ -8,7 +8,7 @@
  * @class validateEmail
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('validateEmail', function () {
     return function (input) {
       if (input === null || input === undefined) {

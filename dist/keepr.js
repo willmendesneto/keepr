@@ -1,6 +1,10 @@
 (function(window, angular, undefined){ "use strict";
 
-angular.module('keepr', []);
+angular.module('keepr.directives', []);
+angular.module('keepr.filters', []);
+angular.module('keepr.services', []);
+
+angular.module('keepr', ['keepr.directives', 'keepr.filters', 'keepr.services']);
 
 
 
@@ -11,7 +15,7 @@ angular.module('keepr', []);
  * @class kpFlipContent
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.directives')
   .directive('kpFlipContent', function () {
 
     /**
@@ -63,7 +67,7 @@ angular.module('keepr')
  * @main kpFocus
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.directives')
   .directive('kpFocus', function () {
     return {
       restrict: 'A',
@@ -112,7 +116,7 @@ angular.module('keepr')
  * @main kpMask
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.directives')
   .directive('kpMask', function ($parse) {
 
     var maskConfig = {
@@ -755,33 +759,10 @@ angular.module('keepr')
 
   });
 
-
-
-angular.module('keepr')
-  .directive('kpOneBind', function($window) {
-    var removeWatch = function(scope, el) {
-      scope.$destroy();
-      el.removeClass('ng-binding ng-scope');
-    };
-
-    return {
-      scope: true,
-      link: function($scope, $el) {
-        if ('load' in $window) {
-          $window.load(function() {
-            removeWatch($scope, $el);
-          });
-        } else {
-          removeWatch($scope, $el);
-        }
-      }
-    };
-  });
-
 /* globals alert */
 
 
-angular.module('keepr')
+angular.module('keepr.directives')
   //  <button type="button" print-content print-target="#target" class="btn btn-primary">Imprimir</button>
   // <div id="target"><p>Exemplo</p></div>
   .directive('kpPrintContent', function () {
@@ -909,7 +890,7 @@ angular.module('keepr')
  * @class camelCase
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('camelCase', ['$filter', function ($filter) {
     return function (input, firstWordWithCase) {
       if (input === null || input === undefined) {
@@ -938,7 +919,7 @@ angular.module('keepr')
  * @class capitalize
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('capitalize', function () {
     return function (input) {
       var str;
@@ -960,7 +941,7 @@ angular.module('keepr')
  * @class charactersQuantity
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('charactersQuantity', function () {
     return function (input, chars, breakOnWord) {
       if (isNaN(chars)) {
@@ -1001,7 +982,7 @@ angular.module('keepr')
  * @class conditional
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('conditional', function () {
     return function(input, trueCase, falseCase) {
       return input === trueCase ? trueCase : falseCase;
@@ -1020,7 +1001,7 @@ angular.module('keepr')
  * @class encodeUri
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('encodeUri', function () {
     return function (input) {
       if (input === undefined || input === null) {
@@ -1040,7 +1021,7 @@ angular.module('keepr')
  * @class inflector
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('inflector', function () {
 
     /**
@@ -1115,7 +1096,7 @@ angular.module('keepr')
  * @class list
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('list', function () {
     return function (input, separator) {
       if (separator === null || separator === undefined) {
@@ -1135,7 +1116,7 @@ angular.module('keepr')
  * @class max
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('max', function () {
     return function (input, elementKey) {
       var out;
@@ -1170,7 +1151,7 @@ angular.module('keepr')
  * @class min
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('min', function () {
     return function (input) {
       var out;
@@ -1196,7 +1177,7 @@ angular.module('keepr')
  * @class snakeCase
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('snakeCase', ['$filter', function ($filter) {
     return function (input) {
       if (input === null || input === undefined) {
@@ -1217,7 +1198,7 @@ angular.module('keepr')
  * @class startFrom
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('startFrom', function () {
     return function(input, start) {
       start = +start; //parse to int
@@ -1235,7 +1216,7 @@ angular.module('keepr')
  * @class trim
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('trim', function () {
     return function (input) {
       var str;
@@ -1261,7 +1242,7 @@ angular.module('keepr')
  * @class uncapitalize
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('uncapitalize', function () {
     return function (input) {
       var str;
@@ -1283,7 +1264,7 @@ angular.module('keepr')
  * @class unique
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('unique', ['$parse', function ($parse) {
 
     return function (items, filterOn) {
@@ -1330,7 +1311,7 @@ angular.module('keepr')
  * @class validateEmail
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('validateEmail', function () {
     return function (input) {
       if (input === null || input === undefined) {
@@ -1351,7 +1332,7 @@ angular.module('keepr')
  * @class wordsQuantity
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('wordsQuantity', function () {
     return function (input, words) {
       if (isNaN(words)){
@@ -1380,7 +1361,7 @@ angular.module('keepr')
  * @class AlertService
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .service('AlertService', function AlertService($rootScope, $timeout) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
@@ -1451,7 +1432,7 @@ angular.module('keepr')
  * @class CryptoOfflineStorageService
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .service('CryptoOfflineStorageService', function CryptoOfflineStorageService() {
     var loadCrypto = typeof CryptoJS !== 'undefined';
 
@@ -1550,7 +1531,7 @@ angular.module('keepr')
 
 
 
-angular.module('keepr')
+angular.module('keepr.services')
   .factory('HttpModel', function HttpModel($q, $http, $filter) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var _params = {
@@ -1716,7 +1697,7 @@ angular.module('keepr')
  * @class NotifyService
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .service('NotifyService', function NotifyService($rootScope) {
 
     var baseNotification = function() {
@@ -2019,7 +2000,7 @@ angular.module('keepr')
 
 
 
-angular.module('keepr')
+angular.module('keepr.services')
   .factory('OfflineModel', function OfflineModel($filter, CryptoOfflineStorageService) {
 
     // Service logic
@@ -2130,7 +2111,7 @@ angular.module('keepr')
  * @class Speech
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .factory('Speech', function () {
     // Service logic
     // ...

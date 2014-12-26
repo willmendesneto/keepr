@@ -8,7 +8,7 @@
  * @class charactersQuantity
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('charactersQuantity', function () {
     return function (input, chars, breakOnWord) {
       if (isNaN(chars)) {

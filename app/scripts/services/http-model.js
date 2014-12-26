@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('keepr')
+angular.module('keepr.services')
   .factory('HttpModel', function HttpModel($q, $http, $filter) {
     // AngularJS will instantiate a singleton by calling "new" on this function
     var _params = {

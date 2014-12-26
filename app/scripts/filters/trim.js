@@ -8,7 +8,7 @@
  * @class trim
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('trim', function () {
     return function (input) {
       var str;

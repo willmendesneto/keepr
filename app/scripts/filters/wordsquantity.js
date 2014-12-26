@@ -8,7 +8,7 @@
  * @class wordsQuantity
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('wordsQuantity', function () {
     return function (input, words) {
       if (isNaN(words)){

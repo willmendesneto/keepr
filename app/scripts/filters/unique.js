@@ -8,7 +8,7 @@
  * @class unique
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('unique', ['$parse', function ($parse) {
 
     return function (items, filterOn) {

@@ -8,7 +8,7 @@
  * @class startFrom
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('startFrom', function () {
     return function(input, start) {
       start = +start; //parse to int

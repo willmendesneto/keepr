@@ -8,7 +8,7 @@
  * @class snakeCase
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('snakeCase', ['$filter', function ($filter) {
     return function (input) {
       if (input === null || input === undefined) {

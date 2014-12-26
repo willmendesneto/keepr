@@ -8,7 +8,7 @@
  * @class min
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.filters')
   .filter('min', function () {
     return function (input) {
       var out;

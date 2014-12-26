@@ -8,7 +8,7 @@
  * @class AlertService
  * @static
  */
-angular.module('keepr')
+angular.module('keepr.services')
   .service('AlertService', function AlertService($rootScope, $timeout) {
     // AngularJS will instantiate a singleton by calling "new" on this function
 
