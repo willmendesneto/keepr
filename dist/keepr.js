@@ -767,7 +767,7 @@ angular.module('keepr.directives')
   // <div id="target"><p>Exemplo</p></div>
   .directive('kpPrintContent', function () {
     return {
-      restrict: 'CA',
+      restrict: 'A',
       scope: {
         printOptions: '=printOptions'
       },
