@@ -14,23 +14,35 @@ angular.module('keepr.services')
     // Public API here
     return {
       _secret: 'my-awesome-key',
-      init: function (key, _items, params) {
+      init: function (key, _items, fields, params) {
 
         var self = this;
+        _fields = fields || null;
         _key = key;
         params = params || {};
-        var i = _items;
+        angular.extend(self, params);
 
         CryptoOfflineStorageService.init({secret: self._secret});
-        _items = CryptoOfflineStorageService.get(_key);
-        if (!_items){
-          CryptoOfflineStorageService.set(_key, _items);
-          _items = i;
+        var _itemsCached = CryptoOfflineStorageService.get(_key);
+
+        if(_itemsCached !== null) {
+          _items = _itemsCached;
+        } else if (!angular.isArray(_items)) {
+          _items = [];
         }
+
+        if (_fields !== null){
+          var _itemsLength = _items.length;
+          var i = 0;
+          for ( ; _itemsLength > i; i++) {
+            _items[i] = this.createValueObject(_items[i]);
+          }
+        }
+        CryptoOfflineStorageService.set(_key, _items);
         self.setListItems(_items, params);
 
         //  Extend params for create a factory in service
-        return angular.extend(self, params);
+        return self;
       },
       createValueObject: function(item) {
         var obj = {};

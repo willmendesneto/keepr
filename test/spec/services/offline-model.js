@@ -17,7 +17,7 @@ describe('Service: OfflineModel', function () {
       {_id: 5, name: 'Joseph Climber', address: 'St. Claire Avenue, Nº 105', phone: '557188339933'},
       {_id: 6, name: 'Joshua Jackson', address: 'St. Claire Avenue, Nº 106', phone: '557188339933'}
     ];
-    MyOfflineModel = OfflineModel.init('myMock', myMock);
+    MyOfflineModel = OfflineModel.init('myMock', myMock, ['_id', 'name', 'address', 'phone']);
   }));
 
   it('OfflineModel should be created', function () {
