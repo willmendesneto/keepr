@@ -8,7 +8,7 @@ describe('Directive: kpMask', function () {
   var element,
     scope,
     rootScope,
-    field = '<input name="phone" kp-mask="\'(999).999-9999\'" kp-placeholder="Add your cellphone" ng-model="x" />'
+    field = '<input name="phone" kp-mask="\'(999).999-9999\'" kp-clean-field="false" kp-placeholder="Add your cellphone" ng-model="x" />'
   ;
 
   beforeEach(inject(function ($rootScope, $compile) {

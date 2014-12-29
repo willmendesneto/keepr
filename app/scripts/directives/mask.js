@@ -44,6 +44,7 @@ angular.module('keepr.directives')
           // Vars for initializing/uninitializing
             originalPlaceholder = iAttrs.placeholder,
             originalMaxlength = iAttrs.maxlength,
+            cleanField = (!angular.isUndefined(iAttrs.kpCleanField) && iAttrs.kpCleanField === 'true'),
           // Vars used exclusively in eventHandler()
             oldValue, oldValueUnmasked, oldCaretPosition, oldSelectionLength;
 
@@ -375,7 +376,7 @@ angular.module('keepr.directives')
           function blurHandler(){
             oldCaretPosition = 0;
             oldSelectionLength = 0;
-            if (!isValid || value.length === 0) {
+            if ((!isValid || value.length === 0) && !!cleanField) {
               valueMasked = '';
               iElement.val('');
               scope.$apply(function (){
