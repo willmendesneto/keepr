@@ -32,6 +32,8 @@ Once you have keepr in your project, just include 'keepr' as a dependency in you
 * AlertService: Provide a Alert service for application
 * CryptoLocalStorageService: Provide a service for Crypt/Decrypt localStorage data in application
 * NotifyService: Provide a HTML5 Nitification service for intercept application messages
+* HttpModel: Provide a simple $http model
+* OfflineModel: Provide a model offline operations; Removed for [https://github.com/willmendesneto/ngOfflineModel](https://github.com/willmendesneto/ngOfflineModel)
 * Speech: Provide a HTML5 Speech service in application
 
 Services example:
