@@ -68,6 +68,7 @@ http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=info
 ## Author
 
 **Wilson Mendes (willmendesneto)**
++ <https://plus.google.com/+WilsonMendes>
 + <https://twitter.com/willmendesneto>
 + <http://github.com/willmendesneto>
 
