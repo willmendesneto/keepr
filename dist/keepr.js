@@ -1526,6 +1526,16 @@ angular.module('keepr.services')
       remove: function(key) {
         window[this.storageType].removeItem(key);
         return true;
+      },
+
+      /**
+       * Remove all elements element of offline storage (localStorage/sessionStorage)
+       * @return {Boolean}
+       * @method clearAll
+       */
+      clearAll: function() {
+        window[this.storageType].clear();
+        return true;
       }
     };
   });
