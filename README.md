@@ -64,7 +64,7 @@ http://plnkr.co/edit/Rln28ZDMpdXxO4ZVadNG?p=info
 * kpMask: Add masks in input fields based in mask string
 
 Directives example:
-http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=info
+http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=preview
 
 
 ## Author
