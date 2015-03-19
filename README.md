@@ -66,7 +66,7 @@ http://plnkr.co/edit/Rln28ZDMpdXxO4ZVadNG?p=info
 * kpImageLazyLoad: Add lazy load for images in application
 
 Directives example:
-http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=info
+http://plnkr.co/edit/khcTtw2UYrysPROKwVIP?p=preview
 
 
 ## Author
