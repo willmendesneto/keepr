@@ -106,15 +106,18 @@ angular.module('keepr.directives')
             objDoc.close();
 
             // Print the document.
-            objFrame.focus();
-            objFrame.print();
+            setTimeout(function(){
+              objFrame.focus();
+              objFrame.print();
+            }, 1000);
+
 
             // Have the frame remove itself in about a minute so that
             // we don't build up too many of these frames.
             setTimeout(function () {
               jFrame.remove();
               return true;
-            }, (60 * 1000));
+            }, 2000);
           });
         }
       }
