@@ -8,7 +8,6 @@ describe('Directive: kpImageLazyLoad', function () {
   var element,
     imageSrc,
     rootScope,
-    timeout,
     imageFinalSrc,
     scope;
 

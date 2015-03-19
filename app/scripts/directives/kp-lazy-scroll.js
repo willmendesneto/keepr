@@ -17,6 +17,10 @@ angular.module('keepr.directives')
           $rootScope.$broadcast('lazyScrollEvent');
         };
 
+        element.on('$destroy', function () {
+          $document.unbind('scroll');
+        });
+
         $document.bind('scroll', function () {
           $timeout.cancel(scrollTimeoutId);
           scrollTimeoutId = $timeout(scope.invoke, 0);

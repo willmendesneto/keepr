@@ -62,6 +62,7 @@ http://plnkr.co/edit/Rln28ZDMpdXxO4ZVadNG?p=info
 ### Directives
 * kpFlipContent: Add flip content for images in aplication
 * kpMask: Add masks in input fields based in mask string
+* kpPrintContent: Print html content based in configuration params
 * kpLazyScroll: Add scroll spy in document for load images
 * kpImageLazyLoad: Add lazy load for images in application
 

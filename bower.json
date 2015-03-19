@@ -12,6 +12,22 @@
   "dependencies": {
     "angular": "~1.3"
   },
+  "keywords": [
+    "angular",
+    "angularjs",
+    "filters",
+    "directives",
+    "service",
+    "keepr",
+    "components",
+    "module"
+  ],
+  "ignore": [
+    "*.{js,yml,md,log}",
+    "app",
+    "test",
+    "dist/scripts"
+  ],
   "resolutions": {
     "angular": "~1.3"
   },
