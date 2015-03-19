@@ -2,8 +2,8 @@
 'use strict';
 
 angular.module('keepr.directives')
-  //  <button type="button" print-content print-target="#target" class="btn btn-primary">Imprimir</button>
-  // <div id="target"><p>Exemplo</p></div>
+  // <button type="button" kp-print-content print-options="{}" class="btn btn-primary">Print</button>
+  // <div id="target"><p>Content to print</p></div>
   .directive('kpPrintContent', function () {
     return {
       restrict: 'A',
@@ -22,7 +22,7 @@ angular.module('keepr.directives')
 
           angular.extend(printOptions, $scope.printOptions);
 
-          if (!!$scope.printOptions.removeBind) {
+          if (!!printOptions.removeBind) {
             $el.removeClass('ng-binding ng-scope');
           }
 
@@ -32,14 +32,14 @@ angular.module('keepr.directives')
           });
 
           $el.bind('click', function () {
-            var $target = angular.element($scope.printOptions.target);
+            var $target = angular.element(printOptions.target);
             // NOTE: We are trimming the jQuery collection down to the
             // first element in the collection.
             if ($target.size() > 1) {
               $target.eq(0).print();
               return false;
             } else if (!$target.size()) {
-              if (!!$scope.printOptions.alert) {
+              if (!!printOptions.alert) {
                 alert('Target not specified!');
               }
               return false;
@@ -89,13 +89,15 @@ angular.module('keepr.directives')
             objDoc.write('<body>');
             objDoc.write('<head>');
             objDoc.write('<title>');
-            objDoc.write($scope.printOptions.title || document.title);
-            if ($scope.printOptions.css.length > 0) {
-              angular.forEach($scope.printOptions.css, function (stylesheet) {
+            objDoc.write(printOptions.title || document.title);
+            objDoc.write('</title>');
+
+            if (printOptions.css.length > 0) {
+              angular.forEach(printOptions.css, function (stylesheet) {
                 objDoc.write('<link href="' + stylesheet + '" rel="stylesheet"/>');
               });
             }
-            objDoc.write('</title>');
+
             objDoc.write(jStyleDiv.html());
             objDoc.write('</head>');
             objDoc.write($target.html());
