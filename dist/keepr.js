@@ -107,6 +107,55 @@ angular.module('keepr.directives')
   });
 
 
+/**
+ * @ngdoc directive
+ * @name keepr.directives:kpDisableKeyEnter
+ * @description prevent the form submission pressing the key enter
+ * # kpDisableKeyEnter
+ */
+angular.module('keepr.directives')
+  .directive('kpDisableKeyEnter', function() {
+    return {
+      restrict: 'A',
+      require: 'ngModel',
+      link: function (element) {
+        element.bind('keydown', function(event){
+          if(event.which === 13){
+            event.preventDefault();
+            window.stop();
+            document.execCommand('Stop');
+            return false;
+          }
+        });
+      }
+    };
+  });
+
+
+
+/**
+ * Add flip content for images in aplication
+ * @module directives
+ * @main kpDynamicName
+ * @class kpDynamicName
+ * @static
+ */
+angular.module('keepr.directives')
+  .directive('kpDynamicName', function($compile, $interpolate) {
+    return {
+      restrict: 'A',
+      terminal: true,
+      priority: 100000,
+      link: function(scope, elem) {
+        var name = $interpolate(elem.attr('kp-dynamic-name'))(scope);
+        elem.removeAttr('kp-dynamic-name');
+        elem.attr('name', name);
+        $compile(elem)(scope);
+      }
+    };
+  });
+
+
 
 /**
  * @ngdoc directive
@@ -307,6 +356,165 @@ angular.module('keepr.directives')
       }
     };
   });
+
+
+/**
+ * @ngdoc directive
+ * @name keepr.directives:kpResetErrors
+ * @description clicking on the cancel button broadcast the event
+ * 'show-errors-reset' for the directive kpShowErrors for remove
+ * the class .has-error from the .form-group element
+ * With the attrubute kp-reset-object you can pass an object to be cleared
+ * Example:
+ * <form novalidate name="form" kp-validate-submit="vm.save(vm.myObject)">
+ *
+ *   <div class="form-group" kp-show-errors>
+ *     <label for="fieldName">Field Name</label>
+ *     <select class="form-control" name="fieldName" ... ></select>
+ *   </div>
+ *
+ *  <button type="button" kp-reset-errors kp-reset-object="vm.myObject">Cancel</button>
+ *  <button type="submit" >Submit</button>
+ *
+ * </form>
+ *
+ * # kpResetErrors
+ */
+angular.module('keepr.directives')
+  .directive('kpResetErrors', function() {
+    return {
+      restrict: 'A',
+      scope: {
+        kpResetObject: '='
+      },
+      link: function (scope, element) {
+        element.bind('click', function () {
+          if(angular.isObject(scope.kpResetObject)){
+            scope.kpResetObject = {};
+          }
+          scope.$broadcast('show-errors-reset');
+        });
+      }
+    };
+  });
+
+
+/**
+ * @ngdoc directive
+ * @name keepr.directives:kpSetFocus
+ * @description Set the focus on the input field
+ * # kpSetFocus
+ */
+angular.module('keepr.directives')
+  .directive('kpSetFocus', ['$timeout', function($timeout) {
+    return {
+      restrict: 'A',
+      link: function (scope, element) {
+        $timeout(function(){
+          element[0].focus();
+        }, 100);
+      }
+    };
+  }]);
+
+
+/**
+ * @ngdoc directive
+ * @name keepr.directives:kpShowErrors
+ * @description this directive add or remove the class .has-error
+ * depending the input validation also listening the events
+ * 'show-errors-check-validity' and 'show-errors-reset'
+ *
+ * Example:
+ * <form novalidate name="form" kp-validate-submit="vm.save(vm.myObject)">
+ *
+ *   <div class="form-group" kp-show-errors>
+ *     <label for="fieldName">Field Name</label>
+ *     <select class="form-control" name="fieldName" ... ></select>
+ *   </div>
+ *
+ *  <button type="button" kp-reset-errors kp-reset-object="vm.myObject">Cancel</button>
+ *  <button type="submit" >Submit</button>
+ *
+ * </form>
+ *
+ * # kpShowErrors
+ */
+angular.module('keepr.directives')
+  .directive('kpShowErrors', ['$timeout', function($timeout) {
+    return {
+      restrict: 'A',
+      require:  '^form',
+      link: function (scope, element, attrs, ctrl) {
+        var inputEl   = element[0].querySelector('[name]'),
+          inputNgEl = angular.element(inputEl),
+          inputName = inputNgEl.attr('name'),
+          hasErrorClass = inputNgEl.attr('kp-show-errors-class') || 'has-error';
+
+        inputNgEl.removeAttr('kp-show-errors-class');
+
+        hasErrorClass.replace('.', '');
+
+        inputNgEl.bind('blur', function() {
+          element.toggleClass(hasErrorClass, ctrl[inputName].$invalid);
+        });
+
+        scope.$on('show-errors-check-validity', function() {
+          element.toggleClass(hasErrorClass, ctrl[inputName].$invalid);
+        });
+
+        scope.$on('show-errors-reset', function() {
+          $timeout(function() {
+            element.removeClass(hasErrorClass);
+          }, 0, false);
+        });
+      }
+    };
+  }]);
+
+
+/**
+ * @ngdoc directive
+ * @name keepr.directives:kpValidateSubmit
+ * @description submit the form only if the form pass the validation,
+ * if not broadcast the event 'show-errors-check-validity' for the
+ * directive kpShowErrors that apply the class .has-error on the .form-group element
+ *
+ * Example:
+ * <form novalidate name="form" kp-validate-submit="vm.save(vm.myObject)">
+ *
+ *   <div class="form-group" kp-show-errors>
+ *     <label for="fieldName">Field Name</label>
+ *     <select class="form-control" name="fieldName" ... ></select>
+ *   </div>
+ *
+ *  <button type="button" kp-reset-errors kp-reset-object="vm.myObject">Cancel</button>
+ *  <button type="submit" >Submit</button>
+
+ * </form>
+ *
+ * # kpValidateSubmit
+ */
+angular.module('keepr.directives')
+  .directive('kpValidateSubmit', ['$parse', function($parse) {
+    return {
+      restrict: 'A',
+      require: 'form',
+      link: function (scope, element, attrs, ctrl) {
+        var fn = $parse(attrs.kpValidateSubmit);
+        element.bind('submit', function (event) {
+          scope.$broadcast('show-errors-check-validity');
+          // if form is not valid cancel it.
+          if (!ctrl.$valid){
+            return false;
+          }
+          scope.$apply(function() {
+            fn(scope, {$event:event});
+          });
+        });
+      }
+    };
+  }]);
 
 /*jshint bitwise: false*/
 
@@ -1214,7 +1422,11 @@ angular.module('keepr.filters')
             out = input[i];
           }
         } else {
-          if (typeof input[i][elementKey] !== 'undefined' && (input[i][elementKey] > out || out === undefined || out === null)) {
+          if (typeof input[i][elementKey] !== 'undefined' &&
+              input[i][elementKey] !== null &&
+              (input[i][elementKey] > out ||
+                out === undefined ||
+                out === null)) {
             out = input[i][elementKey];
           }
         }
