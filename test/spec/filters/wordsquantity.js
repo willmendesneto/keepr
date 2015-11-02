@@ -20,7 +20,7 @@ describe('Filter: wordsQuantity', function () {
   });
 
   it('should fail', function () {
-    expect(wordsQuantity(null, 30)).toNotEqual('1234567890');
+    expect(wordsQuantity(null, 30)).not.toEqual('1234567890');
   });
 
   it('should not trim these down', function () {

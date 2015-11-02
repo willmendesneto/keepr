@@ -24,7 +24,11 @@ angular.module('keepr.filters')
             out = input[i];
           }
         } else {
-          if (typeof input[i][elementKey] !== 'undefined' && (input[i][elementKey] > out || out === undefined || out === null)) {
+          if (typeof input[i][elementKey] !== 'undefined' &&
+              input[i][elementKey] !== null &&
+              (input[i][elementKey] > out ||
+                out === undefined ||
+                out === null)) {
             out = input[i][elementKey];
           }
         }

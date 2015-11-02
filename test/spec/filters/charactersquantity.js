@@ -16,11 +16,11 @@ describe('Filter: charactersQuantity', function () {
   });
 
   it('should fail if input value was "null"', function () {
-    expect(charactersQuantity(null, 30)).toNotEqual('1234567890');
+    expect(charactersQuantity(null, 30)).not.toEqual('1234567890');
   });
 
   it('should fail if input value was "undefined"', function () {
-    expect(charactersQuantity(undefined, 30)).toNotEqual('1234567890');
+    expect(charactersQuantity(undefined, 30)).not.toEqual('1234567890');
   });
 
   it('should not trim these down', function () {
