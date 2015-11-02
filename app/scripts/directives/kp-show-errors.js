@@ -29,19 +29,23 @@ angular.module('keepr.directives')
       link: function (scope, element, attrs, ctrl) {
         var inputEl   = element[0].querySelector('[name]'),
           inputNgEl = angular.element(inputEl),
-          inputName = inputNgEl.attr('name');
+          inputName = inputNgEl.attr('name'),
+          hasErrorClass = inputNgEl.attr('kp-show-errors-class') || 'has-error';
+          inputNgEl.removeAttr('kp-show-errors-class');
+
+        hasErrorClass.replace('.', '');
 
         inputNgEl.bind('blur', function() {
-          element.toggleClass('has-error', ctrl[inputName].$invalid);
+          element.toggleClass(hasErrorClass, ctrl[inputName].$invalid);
         });
 
         scope.$on('show-errors-check-validity', function() {
-          element.toggleClass('has-error', ctrl[inputName].$invalid);
+          element.toggleClass(hasErrorClass, ctrl[inputName].$invalid);
         });
 
         scope.$on('show-errors-reset', function() {
           $timeout(function() {
-            element.removeClass('has-error');
+            element.removeClass(hasErrorClass);
           }, 0, false);
         });
       }
