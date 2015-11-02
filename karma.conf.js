@@ -6,6 +6,31 @@ module.exports = function(config) {
     // base path, that will be used to resolve files and exclude
     basePath: '',
 
+    preprocessors: {
+      'app/scripts/**/*.js': ['coverage']
+    },
+
+    // Which plugins to enable
+    plugins: [
+      'karma-chrome-launcher',
+      'karma-jasmine',
+      'karma-coverage'
+    ],
+
+    // test results reporter to use
+    // possible values: 'dots', 'progress'
+    // available reporters: https://npmjs.org/browse/keyword/karma-reporter
+    reporters: ['progress',  'coverage'],
+
+    //  coverage reporter configuration
+    coverageReporter: {
+      dir:'coverage/',
+      reporters: [
+        { type: 'html', subdir: 'report-html' },
+        { type: 'lcov', subdir: 'report-lcov' }
+      ]
+    },
+
     // testing framework to use (jasmine/mocha/qunit/...)
     frameworks: ['jasmine'],
 

@@ -304,6 +304,15 @@ module.exports = function (grunt) {
     });
   });
 
+  grunt.registerTask('badge', 'Generate Coveralls Badge for projects', function(){
+    require('child_process').exec('cat ./coverage/report-lcov/lcov.info | ./node_modules/.bin/coveralls', function(error, stdin, stdout) {
+      if (!error) {
+        console.log('Coverage task is not running automatically');
+      }
+    });
+
+  });
+
   grunt.registerTask('serve', function (target) {
     if (target === 'dist') {
       return grunt.task.run(['build', 'connect:dist:keepalive']);
@@ -323,7 +332,7 @@ module.exports = function (grunt) {
   grunt.registerTask('server', function (target) {
     target = ':'+target || '';
     grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve'+target]);
+    grunt.task.run(['serve' + target]);
   });
 
   grunt.registerTask('docs', [
@@ -332,7 +341,10 @@ module.exports = function (grunt) {
   grunt.registerTask('test', [
     'clean:server',
     'connect:test',
-    'karma'
+    'newer:jshint:all',
+    'newer:jshint:test',
+    'karma',
+    'badge'
   ]);
 
   grunt.registerTask('build', [
@@ -341,8 +353,8 @@ module.exports = function (grunt) {
     'ngAnnotate',
     'copy:dist',
     'uglify',
-    'buildNgModuleFile:'+grunt.config.get('yeoman')['moduleName']+'.js',
-    'buildNgModuleFile:'+grunt.config.get('yeoman')['moduleName']+'.min.js'
+    'buildNgModuleFile:' + grunt.config.get('yeoman').moduleName + '.js',
+    'buildNgModuleFile:' + grunt.config.get('yeoman').moduleName + '.min.js'
   ]);
 
   grunt.registerTask('default', [
