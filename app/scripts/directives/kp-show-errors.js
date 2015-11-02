@@ -31,7 +31,8 @@ angular.module('keepr.directives')
           inputNgEl = angular.element(inputEl),
           inputName = inputNgEl.attr('name'),
           hasErrorClass = inputNgEl.attr('kp-show-errors-class') || 'has-error';
-          inputNgEl.removeAttr('kp-show-errors-class');
+
+        inputNgEl.removeAttr('kp-show-errors-class');
 
         hasErrorClass.replace('.', '');
 
