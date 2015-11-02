@@ -32,10 +32,10 @@ angular.module('keepr.directives')
           scope.$broadcast('show-errors-check-validity');
           // if form is not valid cancel it.
           if (!ctrl.$valid){
-            return false
-          };
+            return false;
+          }
           scope.$apply(function() {
-              fn(scope, {$event:event});
+            fn(scope, {$event:event});
           });
         });
       }

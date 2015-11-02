@@ -27,7 +27,7 @@ angular.module('keepr.directives')
       restrict: 'A',
       require:  '^form',
       link: function (scope, element, attrs, ctrl) {
-        var inputEl   = element[0].querySelector("[name]"),
+        var inputEl   = element[0].querySelector('[name]'),
           inputNgEl = angular.element(inputEl),
           inputName = inputNgEl.attr('name');
 

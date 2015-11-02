@@ -28,8 +28,8 @@ angular.module('keepr.directives')
       scope: {
         kpResetObject: '='
       },
-      link: function (scope, element, attrs) {
-        element.bind('click', function (event) {
+      link: function (scope, element) {
+        element.bind('click', function () {
           if(angular.isObject(scope.kpResetObject)){
             scope.kpResetObject = {};
           }

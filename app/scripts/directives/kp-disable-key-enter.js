@@ -10,7 +10,7 @@ angular.module('keepr.directives')
     return {
       restrict: 'A',
       require: 'ngModel',
-      link: function (scope, element, attrs, ctrl) {
+      link: function (element) {
         element.bind('keydown', function(event){
           if(event.which === 13){
             event.preventDefault();

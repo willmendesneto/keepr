@@ -9,7 +9,7 @@ angular.module('keepr.directives')
   .directive('kpSetFocus', ['$timeout', function($timeout) {
     return {
       restrict: 'A',
-      link: function (scope, element, attrs, ctrl) {
+      link: function (scope, element) {
         $timeout(function(){
           element[0].focus();
         }, 100);
