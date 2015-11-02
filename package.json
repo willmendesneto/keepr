@@ -34,7 +34,7 @@
     "karma": "~0.12",
     "karma-chrome-launcher": "~0.1.3",
     "karma-coverage": "^0.5.3",
-    "karma-jasmine": "~0.1.5",
+    "karma-jasmine": "~0.2.0",
     "karma-ng-html2js-preprocessor": "~0.1.0",
     "karma-ng-scenario": "~0.1.0",
     "karma-phantomjs-launcher": "~0.1.4",
