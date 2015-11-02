@@ -1,9 +1,9 @@
 node_modules
 dist/scripts
 docs
+coverage
 app/bower_components
 .tmp
 .sass-cache
 
 protractor_conf.js
-
