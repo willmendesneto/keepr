@@ -3,7 +3,7 @@
   "authors": [
     "Wilson Mendes <willmendesneto@gmail.com>"
   ],
-  "main": "dist/keepr.js",
+  "main": "./dist/keepr.js",
   "license": "MIT",
   "homepage": "https://github.com/willmendesneto/keepr",
   "description": "KEEPR - A simple list of Angular components",
