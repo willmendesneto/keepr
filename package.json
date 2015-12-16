@@ -2,7 +2,7 @@
   "author": "Wilson Mendes <willmendesneto@gmail.com>",
   "name": "KEEPR",
   "description": "KEEPR - A simple list of Angular components",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "homepage": "https://github.com/willmendesneto/keepr",
   "devDependencies": {
     "coveralls": "^2.11.4",
