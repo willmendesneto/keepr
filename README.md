@@ -1,9 +1,10 @@
 ![Keepr Logo](logo-keepr.png "KEEPR")
-KEEPR - A simple list of Angular components
+
+# KEEPR 
+> A simple list of Angular components
 
 [![Build Status](https://travis-ci.org/willmendesneto/keepr.png?branch=master)](https://travis-ci.org/willmendesneto/keepr)
 [![Coverage Status](https://coveralls.io/repos/willmendesneto/keepr/badge.svg?branch=master)](https://coveralls.io/r/willmendesneto/keepr?branch=master)
-=================
 
 This project is a module with a list of services, directives and filters for begin your application with idea of simplify your bootstrap with Angular.
 
