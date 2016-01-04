@@ -231,13 +231,12 @@ angular.module('keepr.directives')
     };
   });
 
-/* globals alert */
 
 
 angular.module('keepr.directives')
   // <button type="button" kp-print-content print-options="{}" class="btn btn-primary">Print</button>
   // <div id="target"><p>Content to print</p></div>
-  .directive('kpPrintContent', function () {
+  .directive('kpPrintContent', function ($window) {
     return {
       restrict: 'A',
       scope: {
@@ -249,6 +248,7 @@ angular.module('keepr.directives')
             removeBind: false,
             target: 'body',
             title: 'Print',
+            tryWindowPrint: true,
             alert: true,
             css: []
           };
@@ -265,15 +265,40 @@ angular.module('keepr.directives')
           });
 
           $el.bind('click', function () {
-            var $target = angular.element(printOptions.target);
+            if (printOptions.tryWindowPrint && window && 'print' in window) {
+              $window.print();
+              return;
+            }
+
+            function trim(content) {
+              return content.replace(/^\s+|\s+$/g, '');
+            }
+            function replaceToHTMLEntities(content) {
+              var newContent = content.replace(/&quot;/g, '"')
+                                      .replace(/&amp;/g, '&')
+                                      .replace(/&gt;/g, '>')
+                                      .replace(/&lt;/g, '<');
+              return newContent;
+            }
+            var targetHtml = [];
+            var targets = [];
+            if (printOptions.target.indexOf(',') !== -1) {
+              targets = printOptions.target.split(',');
+            } else {
+              targets.push(printOptions.target);
+            }
+
+            targetHtml = targets.map(function(el){
+              return angular.element(trim(el)).parent().html();
+            }).join('');
+
+            targetHtml = replaceToHTMLEntities(targetHtml);
+
             // NOTE: We are trimming the jQuery collection down to the
             // first element in the collection.
-            if ($target.size() > 1) {
-              $target.eq(0).print();
-              return false;
-            } else if (!$target.size()) {
+            if (targetHtml === '') {
               if (!!printOptions.alert) {
-                alert('Target not specified!');
+                $window.alert('Target not specified!');
               }
               return false;
             }
@@ -311,8 +336,8 @@ angular.module('keepr.directives')
             // This is the only way I could find to get the style
             // tags into IE.
             var jStyleDiv = angular.element('<div>').append(
-                angular.element('style').clone()
-              );
+              angular.element('style').clone()
+            );
 
             // Write the HTML for the document. In this, we will
             // write out the HTML of the current element.
@@ -332,8 +357,8 @@ angular.module('keepr.directives')
             }
 
             objDoc.write(jStyleDiv.html());
-            objDoc.write('</head>');
-            objDoc.write($target.html());
+            objDoc.write('</head><body>');
+            objDoc.write(targetHtml);
             objDoc.write('</body>');
             objDoc.write('</html>');
             objDoc.close();

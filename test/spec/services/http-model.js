@@ -38,6 +38,16 @@ describe('Service: HttpModel', function () {
     expect(products.length).toBe(2);
     expect(products[0].id).toBe(1);
     expect(products[1].id).toBe(2);
+
+    // Cached response
+    // This new item for response should not be returned
+    response.push({id:3, name: 'PC'});
+    httpBackend.whenGET('/api/products').respond(response);
+    MyModel.$get('products').then(function(data){
+      products = data;
+    });
+    expect(response.length).toBe(3);
+    expect(products.length).toBe(2);
   });
 
   it('#$find', function () {
