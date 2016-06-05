@@ -12,7 +12,7 @@ describe('Keepr: module definitions', function () {
     dependencies = angular.module('keepr').requires;
   });
 
-  it('should load directives module', function () {
+  fit('should load directives module', function () {
     expect(hasModule('keepr.directives')).toBe(true);
   });
 
