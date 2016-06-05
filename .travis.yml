@@ -12,5 +12,5 @@ before_script:
   - 'bower install'
 
 after_script:
+  - 'git grep -nE "^\s*?f(describe|it)" -- "./test/*.js" "./test/**/*.js"'
   - 'grunt'
-
